@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+
+:root {
+
+  --card-title-font-size: 18px;
+
+  @include mat.card-overrides((
+    elevated-container-color: var(--color-bg-white),
+    elevated-container-elevation: 0 2px 9px rgba(0, 0, 0, 0.04),
+    title-text-size: var(--card-title-font-size),
+    title-text-weight: var(--font-weight-bold),
+  ));
+
+  .mat-mdc-card-title {
+    color: var(--color-text-primary);
+  }
+}

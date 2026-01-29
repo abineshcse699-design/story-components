@@ -1,0 +1,37 @@
+<div class="authority-card" [class.clickable]="clickable">
+  <div class="header">
+    <div class="flag">
+      <img *ngIf="flagUrl; else placeholder" [src]="flagUrl" [alt]="countryName" />
+      <ng-template #placeholder>
+        <div class="flag-placeholder"></div>
+      </ng-template>
+    </div>
+
+    <div class="country">
+      <h3>{{ countryName }}</h3>
+      <span class="iso" *ngIf="isoCode">({{ isoCode }})</span>
+    </div>
+
+    <span class="badge" *ngIf="badge">{{ badge }}</span>
+  </div>
+
+  <div class="body">
+    <h4 class="authority-name">{{ authorityName }}</h4>
+    <p class="department" *ngIf="department">{{ department }}</p>
+
+    <div class="contact" *ngIf="email">
+      <mat-icon>mail</mat-icon>
+      <span>{{ email }}</span>
+    </div>
+
+    <div class="contact" *ngIf="phone">
+      <mat-icon>phone</mat-icon>
+      <span>{{ phone }}</span>
+    </div>
+
+    <div class="contact" *ngIf="website">
+      <mat-icon>language</mat-icon>
+      <span>{{ website }}</span>
+    </div>
+  </div>
+</div>

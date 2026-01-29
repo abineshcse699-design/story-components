@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+
+@include mat.tooltip-overrides((
+  container-color: var(--color-bg-white),
+  supporting-text-color: var(--color-text-secondary),
+  supporting-text-size: 13px,
+  container-shape: 8px,
+));
+
+.mat-mdc-tooltip-surface {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,81 @@
+@use './variables';
+
+$prefix: 'upov-';
+
+.#{$prefix}text-muted {
+  color: var(--color-text-muted);
+}
+
+.#{$prefix}text-primary {
+  color: var(--color-text-primary);
+}
+
+.#{$prefix}text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.#{$prefix}text-white {
+  color: var(--color-text-negative);
+}
+
+.#{$prefix}text-light {
+  font-weight: var(--font-weight-light);
+}
+
+.#{$prefix}text-regular {
+  font-weight: var(--font-weight-regular);
+}
+
+.#{$prefix}text-weight-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.#{$prefix}text-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.#{$prefix}text-italic {
+  font-style: italic;
+}
+
+.#{$prefix}text-center {
+  text-align: center;
+}
+
+.#{$prefix}text-right {
+  text-align: right;
+}
+
+.#{$prefix}text-left {
+  text-align: left;
+}
+
+.#{$prefix}text-uppercase {
+  text-transform: uppercase;
+}
+
+.#{$prefix}text-lowercase {
+  text-transform: lowercase;
+}
+
+.#{$prefix}text-capitalize {
+  text-transform: capitalize;
+}
+
+.#{$prefix}text-wrap {
+  white-space: normal;
+}
+
+.#{$prefix}text-nowrap {
+  white-space: nowrap;
+}
+
+.#{$prefix}text-underline {
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary-green-light);
+}
+
+.#{$prefix}text-small {
+  font-size: 0.6em;
+  line-height: 1.4em;
+}

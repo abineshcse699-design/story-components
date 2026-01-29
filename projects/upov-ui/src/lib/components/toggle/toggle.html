@@ -1,0 +1,19 @@
+<mat-button-toggle-group
+  [name]="name()"
+  [attr.aria-label]="ariaLabel()"
+  [hideMultipleSelectionIndicator]="true"
+  [hideSingleSelectionIndicator]="true"
+  (change)="onChange($event)"
+>
+
+  @for (option of options(); track option.value) {
+    <mat-button-toggle
+      disableRipple
+      [checked]="option.value === currentValue()"
+      [value]="option.value">
+      {{ option.label }}
+    </mat-button-toggle>
+
+  }
+  
+</mat-button-toggle-group>

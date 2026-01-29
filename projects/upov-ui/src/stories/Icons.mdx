@@ -1,0 +1,201 @@
+import {Meta} from "@storybook/addon-docs/blocks";
+
+<Meta title="Getting Started/Icons"/>
+
+# Icons
+
+<div className="sb-paragraph">
+  UPOV UI uses Material Symbols font icons by default and provides a system for registering custom SVG icons.
+</div>
+
+---
+
+## Material Icons
+
+This project uses **Material Symbols** font icons from Google. These icons are available by default through Angular Material's `<mat-icon>` component.
+
+### Resources
+
+- **Browse icons:** [fonts.google.com/icons](https://fonts.google.com/icons)
+- **Official Documentation:** [material.angular.dev/components/icon/overview](https://material.angular.dev/components/icon/overview)
+
+### Usage
+
+Material Icons are available out of the box. Simply use the icon name:
+
+```html
+<mat-icon>home</mat-icon>
+<mat-icon>search</mat-icon>
+<mat-icon>settings</mat-icon>
+<mat-icon>favorite</mat-icon>
+<mat-icon>menu</mat-icon>
+```
+
+Or with the `fontIcon` attribute:
+
+```html
+<mat-icon fontIcon="home"></mat-icon>
+```
+
+For detailed usage, styling, and theming options, refer to the [Angular Material Icon documentation](https://material.angular.dev/components/icon/overview).
+
+---
+
+## Custom SVG Icons
+
+UPOV UI includes a system for registering custom SVG icons. The library comes with pre-registered social media icons:
+
+- **twitter** - X/Twitter icon
+- **linkedin** - LinkedIn icon
+- **youtube** - YouTube icon
+- **envelope** - Email/Envelope icon
+
+### Usage of Custom SVG Icons
+
+Use custom SVG icons with the `svgIcon` attribute:
+
+```html
+<mat-icon svgIcon="twitter"></mat-icon>
+<mat-icon svgIcon="linkedin"></mat-icon>
+<mat-icon svgIcon="youtube"></mat-icon>
+<mat-icon svgIcon="envelope"></mat-icon>
+```
+
+---
+
+## Registering Your Own Custom Icons
+
+There are three ways to register custom SVG icons:
+
+### Option 1: Register in Your Application
+
+Register custom icons when configuring the library in your `app.config.ts`:
+
+```typescript
+// app.config.ts
+import { ApplicationConfig } from '@angular/core';
+import { provideUpovUi } from 'upov-ui';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideUpovUi({
+      icons: [
+        { name: 'custom-icon', path: 'assets/icons/custom-icon.svg' },
+        { name: 'another-icon', path: 'assets/icons/another-icon.svg' },
+      ]
+    }),
+  ]
+};
+```
+
+### Option 2: Register Programmatically
+
+Use the `IconHelper` service to register icons in components or services:
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { IconHelper } from 'upov-ui';
+
+export class AppComponent {
+  private iconHelper = inject(IconHelper);
+
+  constructor() {
+    // Register a single icon
+    this.iconHelper.registerIcon(
+      'custom-icon',
+      'assets/icons/custom-icon.svg'
+    );
+
+    // Register multiple icons
+    this.iconHelper.registerIcons([
+      { name: 'icon1', path: 'assets/icons/icon1.svg' },
+      { name: 'icon2', path: 'assets/icons/icon2.svg' },
+    ]);
+
+    // Register with inline SVG
+    this.iconHelper.registerIcons([
+      {
+        name: 'inline-icon',
+        svg: '<svg>...</svg>'
+      },
+    ]);
+  }
+}
+```
+
+### Option 3: Add Icons to the Library
+
+To bundle custom SVG icons with the UPOV UI library itself:
+
+1. Place your SVG file in `projects/upov-ui/src/assets/icons/`
+2. Register the icon in `projects/upov-ui/src/lib/core/icons.ts`:
+
+```typescript
+// projects/upov-ui/src/lib/core/icons.ts
+import { IconRegistration } from '../models';
+
+export const icons: IconRegistration[] = [
+  { name: 'twitter', path: 'assets/icons/x-twitter.svg' },
+  { name: 'linkedin', path: 'assets/icons/linkedin.svg' },
+  { name: 'youtube', path: 'assets/icons/youtube.svg' },
+  { name: 'envelope', path: 'assets/icons/envelope.svg' },
+  // Add your new icon here:
+  { name: 'my-icon', path: 'assets/icons/my-icon.svg' },
+];
+```
+
+---
+
+## Using the IconHelper Service
+
+The `IconHelper` service provides a method to check if an icon is a registered SVG icon:
+
+```typescript
+import { Component, inject, signal } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
+import { IconHelper } from 'upov-ui';
+
+@Component({
+  selector: 'app-example',
+  imports: [MatIcon],
+  template: `
+    @if (iconHelper.isSvgIcon(iconName())) {
+      <mat-icon [svgIcon]="iconName()"></mat-icon>
+    } @else {
+      <mat-icon [fontIcon]="iconName()"></mat-icon>
+    }
+  `
+})
+export class ExampleComponent {
+  protected iconHelper = inject(IconHelper);
+  protected iconName = signal('custom-icon');
+}
+```
+
+This allows you to dynamically switch between font icons and SVG icons based on registration.
+
+---
+
+## Best Practices
+
+<div className="sb-warning">
+  <strong>SVG Optimization:</strong> Make sure your SVG files are optimized and properly formatted.
+  Remove unnecessary attributes and ensure the viewBox is correctly set for proper scaling.
+</div>
+
+### Tips for SVG Icons:
+
+- Keep SVG files small and optimized
+- Use a consistent viewBox (e.g., `0 0 24 24`)
+- Remove unnecessary metadata and comments
+- Use monochrome SVGs when possible (can be colored with CSS)
+- Test icons at different sizes to ensure they scale well
+
+---
+
+## See Also
+
+- [Angular Material Icon Component](https://material.angular.dev/components/icon/overview)
+- [Material Symbols Gallery](https://fonts.google.com/icons)
+- [Custom SVG Icons Story](/story/design-system-icons--custom-svg-icons)
+

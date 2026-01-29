@@ -1,0 +1,12 @@
+<button
+  mat-button
+  class="filter-btn"
+  [class.active]="active"
+  type="button"
+  (click)="onToggle()"
+>
+  <mat-icon class="filter-icon">filter_list</mat-icon>
+  <span class="filter-text">
+    {{ active ? 'Hide filters' : label }}
+  </span>
+</button>

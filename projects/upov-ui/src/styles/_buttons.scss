@@ -1,0 +1,156 @@
+@use '@angular/material' as mat;
+
+@include mat.button-overrides((
+  filled-container-color: var(--color-primary-green-dark),
+  filled-label-text-color: var(--color-primary-green-light),
+  filled-label-text-weight: 350,
+  filled-container-height: 40px,
+  filled-label-text-size: 16px,
+  text-label-text-size: 16px,
+));
+
+.upov-button {
+  &.upov-button--icon-outlined {
+    box-shadow: currentColor 0 0 0 1px inset;
+
+    &.upov-button--default {
+      @include mat.icon-button-overrides((
+        icon-color: currentColor,
+        state-layer-color: currentColor,
+      ));
+    }
+  }
+
+  &--default {
+    @include mat.button-overrides((
+      filled-container-color: var(--color-primary-green-dark),
+      filled-label-text-color: var(--color-primary-green-light),
+    ));
+
+    @include mat.icon-button-overrides((
+      icon-color: var(--color-primary-green-dark),
+      state-layer-color: var(--color-primary-green-dark),
+    ));
+
+    &.upov-button--icon-filled {
+      @include mat.icon-button-overrides((
+        icon-color: var(--color-primary-green-light),
+        state-layer-color: var(--color-primary-green-bright),
+      ));
+      background-color: var(--color-primary-green-dark) !important;
+    }
+  }
+
+  &--primary {
+    @include mat.button-overrides((
+      filled-container-color: var(--color-primary-green-bright),
+      filled-label-text-color: var(--color-primary-blue-light),
+      text-label-text-color: var(--color-primary-green-bright),
+      text-state-layer-color: var(--color-primary-green-bright),
+    ));
+
+    @include mat.icon-button-overrides((
+      icon-color: var(--color-primary-green-bright),
+      state-layer-color: var(--color-primary-green-bright),
+    ));
+
+    &.upov-button--icon-filled {
+      @include mat.icon-button-overrides((
+        icon-color: var(--color-text-negative),
+        state-layer-color: var(--color-bg-white),
+      ));
+      background-color: var(--color-primary-green-bright) !important;
+    }
+  }
+
+  &--secondary {
+    @include mat.button-overrides((
+      filled-container-color: var(--color-bg-white),
+      filled-label-text-color: var(--color-primary-green-dark),
+      text-label-text-color: var(--color-primary-green-dark),
+      filled-ripple-color: color-mix(in srgb, var(--color-primary-green-bright) 10%, transparent),
+      text-state-layer-color: var(--color-primary-green-bright),
+      filled-state-layer-color: var(--color-primary-green-bright),
+    ));
+
+    &.mdc-button--unelevated {
+      border: currentColor 1px solid;
+    }
+
+    @include mat.icon-button-overrides((
+      icon-color: var(--color-primary-green-dark),
+      state-layer-color: var(--color-primary-green-bright),
+    ));
+
+    &.upov-button--icon-filled {
+      background-color: var(--color-bg-white) !important;
+      box-shadow: var(--color-primary-green-dark) 0 0 0 1px inset;
+    }
+  }
+
+  &--danger {
+    @include mat.button-overrides((
+      filled-container-color: var(--color-danger),
+      filled-label-text-color: var(--color-text-negative),
+      text-label-text-color: var(--color-danger),
+      text-ripple-color: color-mix(in srgb, var(--color-danger) 5%, transparent),
+      text-state-layer-color: var(--color-danger),
+    ));
+
+    @include mat.icon-button-overrides((
+      icon-color: var(--color-danger),
+      state-layer-color: var(--color-danger),
+    ));
+
+    &.upov-button--icon-filled {
+      @include mat.icon-button-overrides((
+        icon-color: var(--color-text-negative),
+        state-layer-color: var(--color-bg-white),
+      ));
+      background-color: var(--color-danger) !important;
+    }
+  }
+
+  &--accent {
+    @include mat.button-overrides((
+      filled-container-color: var(--color-primary-green-light),
+      filled-label-text-color: var(--color-primary-green-dark),
+      text-label-text-color: var(--color-yellow),
+      text-ripple-color: color-mix(in srgb, var(--color-yellow) 5%, transparent),
+      text-state-layer-color: var(--color-danger),
+    ));
+
+    @include mat.icon-button-overrides((
+      icon-color: var(--color-primary-green-light),
+      state-layer-color: var(--color-primary-green-dark),
+      pressed-state-layer-opacity: .05,
+    ));
+
+    &.upov-button--icon-filled {
+      @include mat.icon-button-overrides((
+        icon-color: var(--color-primary-green-dark),
+      ));
+      background-color: var(--color-primary-green-light) !important;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-green-light);
+    outline-offset: 2px;
+  }
+
+  &--small {
+    @include mat.button-overrides((
+      filled-label-text-size: 14px,
+      filled-container-height: 30px,
+      text-label-text-size: 14px,
+    ));
+  }
+
+  &--large {
+    @include mat.button-overrides((
+      filled-container-height: 48px,
+      text-label-text-size: 18px,
+    ));
+  }
+}

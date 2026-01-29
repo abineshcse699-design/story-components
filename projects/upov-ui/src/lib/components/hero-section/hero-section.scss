@@ -1,0 +1,53 @@
+@use '../../../styles/grid' as grid;
+
+:host {
+  width: 100%;
+  display: flex;
+  min-height: 250px;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-bg-light);
+}
+
+.hero {
+  display: block;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  // From sm (600px) and up: increased padding
+  @include grid.respond-above('sm') {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  &__title, [hero-title] {
+    margin: 0 0 0.5rem;
+    font-size: 32px;
+    line-height: 1.2;
+
+    ::ng-deep {
+      h1, h2, h3, h4, h5, h6 {
+        font-size: inherit;
+        color: inherit;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  &__subtitle {
+    margin: 0 0 1rem;
+    color: var(--upov-text-secondary);
+    font-size: 20px;
+  }
+
+  &__content {
+    margin-top: 1rem;
+  }
+
+  &__title, &__subtitle, &__content {
+    &:empty {
+      display: none;
+    }
+  }
+}

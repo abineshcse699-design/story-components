@@ -1,0 +1,525 @@
+@use 'sass:map';
+@use 'sass:list';
+
+// ============================================================================
+// 12-Column CSS Grid Layout System
+// ============================================================================
+// A mobile-first, responsive grid system using CSS Grid.
+// Follows Material Design breakpoints and utility-first approach.
+//
+// Usage:
+//   <div class="grid-container">
+//     <div class="grid">
+//       <div class="col-12 md:col-6 lg:col-4">Column content</div>
+//     </div>
+//   </div>
+//
+// Customization:
+//   - Modify $grid-columns to change the number of columns (default: 12)
+//   - Modify $grid-gap-* variables to adjust spacing
+//   - Modify $container-max-widths to change container sizes per breakpoint
+//   - Add more breakpoints by extending the $breakpoints-grid map
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// Configuration Variables
+// ----------------------------------------------------------------------------
+
+// Number of columns in the grid system
+$grid-columns: 12 !default;
+
+// Grid gap (spacing between columns)
+// You can customize these values to match your design system
+$grid-gap-none: 0 !default;
+$grid-gap-xs: 0.25rem !default; // 4px
+$grid-gap-sm: 0.5rem !default; // 8px
+$grid-gap-md: 1rem !default; // 16px (default)
+$grid-gap-lg: 1.5rem !default; // 24px
+$grid-gap-xl: 2rem !default; // 32px
+$grid-gap-2xl: 3rem !default; // 48px
+
+$grid-gap-default: $grid-gap-md !default;
+
+// Container max-widths for each breakpoint
+// Set to null for full-width containers at that breakpoint
+$container-max-widths: (
+  'sm': 540px,
+  'md': 720px,
+  'lg': 960px,
+  'xl': 1140px
+) !default;
+
+// Container padding (horizontal)
+$container-padding: 1rem !default;
+
+// Mobile-first breakpoints (min-width)
+// These breakpoints match Angular Material's breakpoint system:
+// https://material.angular.io/cdk/layout/overview
+$breakpoints-grid: (
+  'sm': 600px, // Small (600px - 959px)
+  'md': 960px, // Medium (960px - 1279px)
+  'lg': 1280px, // Large (1280px - 1919px)
+  'xl': 1920px, // XLarge (1920px+)
+) !default;
+
+// ----------------------------------------------------------------------------
+// Mixins
+// ----------------------------------------------------------------------------
+
+/// Get the next breakpoint value in the grid system.
+/// Used internally to calculate breakpoint ranges.
+///
+/// @access private
+/// @param {String} $breakpoint - Current breakpoint name (sm, md, lg, xl)
+/// @return {Number|null} The pixel value of the next breakpoint, or null if this is the largest
+/// @example scss - Get next breakpoint
+///   $next: get-next-breakpoint('sm'); // Returns 960px (md)
+///   $next: get-next-breakpoint('xl'); // Returns null (no next breakpoint)
+@function get-next-breakpoint($breakpoint) {
+  $keys: map.keys($breakpoints-grid);
+  $index: list.index($keys, $breakpoint);
+
+  @if $index and $index < list.length($keys) {
+    $next-key: list.nth($keys, $index + 1);
+    @return map.get($breakpoints-grid, $next-key);
+  }
+
+  @return null;
+}
+
+/// Apply styles at and above a breakpoint (mobile-first approach).
+/// Generates a min-width media query for progressive enhancement.
+///
+/// @group Breakpoints
+/// @param {String} $breakpoint - Breakpoint name: sm (600px), md (960px), lg (1280px), xl (1920px)
+/// @content Styles to apply at this breakpoint and above
+/// @output Media query with min-width
+/// @example scss - Basic responsive styling
+///   .element {
+///     font-size: 14px; // Mobile base
+///
+///     @include respond-above('md') {
+///       font-size: 16px; // 960px and up
+///     }
+///   }
+/// @example scss - Multiple breakpoints
+///   .card {
+///     padding: 1rem;
+///
+///     @include respond-above('sm') { padding: 1.5rem; }
+///     @include respond-above('lg') { padding: 2rem; }
+///   }
+@mixin respond-above($breakpoint) {
+  @if map.has-key($breakpoints-grid, $breakpoint) {
+    $value: map.get($breakpoints-grid, $breakpoint);
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint `#{$breakpoint}` in $breakpoints-grid. Valid: sm, md, lg, xl";
+  }
+}
+
+/// Apply styles only at a specific breakpoint range.
+/// Generates a media query with both min-width and max-width.
+///
+/// @group Breakpoints
+/// @param {String} $breakpoint - Breakpoint name: sm, md, lg, or xl
+/// @content Styles to apply only within this breakpoint range
+/// @output Media query with min-width and max-width
+/// @example scss - Styles only for tablets
+///   .element {
+///     @include respond-only('md') {
+///       background: blue; // Only between 960px and 1279px
+///     }
+///   }
+@mixin respond-only($breakpoint) {
+  @if map.has-key($breakpoints-grid, $breakpoint) {
+    $min-value: map.get($breakpoints-grid, $breakpoint);
+    $next-value: get-next-breakpoint($breakpoint);
+
+    @if $next-value {
+      @media (min-width: $min-value) and (max-width: #{$next-value - 0.02px}) {
+        @content;
+      }
+    } @else {
+      // This is the largest breakpoint (xl)
+      @media (min-width: $min-value) {
+        @content;
+      }
+    }
+  } @else {
+    @warn "Unknown breakpoint `#{$breakpoint}` in $breakpoints-grid. Valid: sm, md, lg, xl";
+  }
+}
+
+/// Generate column classes for a specific breakpoint.
+/// Creates .col-1 through .col-12 classes with optional prefix.
+///
+/// @access private
+/// @param {String} $prefix [''] - Optional prefix for breakpoint-specific classes (e.g., 'md:')
+/// @output Column utility classes
+/// @example scss - Generate base column classes
+///   @include generate-columns(); // .col-1, .col-2, etc.
+/// @example scss - Generate breakpoint-specific classes
+///   @include generate-columns('md:'); // .md:col-1, .md:col-2, etc.
+@mixin generate-columns($prefix: '') {
+  @for $i from 1 through $grid-columns {
+    .#{$prefix}col-#{$i} {
+      grid-column: span $i / span $i;
+    }
+  }
+
+  // Full width utility
+  .#{$prefix}col-full {
+    grid-column: 1 / -1;
+  }
+
+  // Auto-sized columns
+  .#{$prefix}col-auto {
+    grid-column: auto;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Container
+// ----------------------------------------------------------------------------
+
+// .grid-container - Centers content and limits max-width
+// Use this as the outer wrapper for your grid layouts
+.grid-container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $container-padding;
+  padding-left: $container-padding;
+
+  // Apply max-widths at each breakpoint
+  @each $breakpoint, $max-width in $container-max-widths {
+    @include respond-above($breakpoint) {
+      @if $max-width != null {
+        max-width: $max-width;
+      }
+    }
+  }
+}
+
+// Fluid container variant (no max-width)
+.grid-container-fluid {
+  width: 100%;
+  padding-right: $container-padding;
+  padding-left: $container-padding;
+}
+
+// ----------------------------------------------------------------------------
+// Grid
+// ----------------------------------------------------------------------------
+
+// .grid - The main grid container using CSS Grid
+.grid {
+  display: grid;
+  grid-template-columns: repeat($grid-columns, 1fr);
+  gap: $grid-gap-default;
+
+  // Nested grids
+  .grid {
+    padding: 0;
+  }
+}
+
+// Grid with auto-fit columns (for use with justify-content utilities)
+// Use this when you want to align grid items that don't fill the entire width
+.grid-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+}
+
+// Grid with auto-fill columns
+.grid-auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
+}
+
+// ----------------------------------------------------------------------------
+// Column Classes (Mobile-first / Base)
+// ----------------------------------------------------------------------------
+// These apply to all screen sizes unless overridden by breakpoint-specific classes
+
+@include generate-columns();
+
+// ----------------------------------------------------------------------------
+// Responsive Column Classes
+// ----------------------------------------------------------------------------
+// These classes override base column sizes at specific breakpoints
+// Example: .col-12.md:col-6 = full width on mobile, half width on medium+
+
+@each $breakpoint, $min-width in $breakpoints-grid {
+  @include respond-above($breakpoint) {
+    @include generate-columns('#{$breakpoint}\\:');
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Grid Gap Utilities
+// ----------------------------------------------------------------------------
+// Control spacing between grid items
+
+.gap-none {
+  gap: $grid-gap-none;
+}
+
+.gap-xs {
+  gap: $grid-gap-xs;
+}
+
+.gap-sm {
+  gap: $grid-gap-sm;
+}
+
+.gap-md {
+  gap: $grid-gap-md;
+}
+
+.gap-lg {
+  gap: $grid-gap-lg;
+}
+
+.gap-xl {
+  gap: $grid-gap-xl;
+}
+
+.gap-2xl {
+  gap: $grid-gap-2xl;
+}
+
+// Row gap only
+.gap-y-none {
+  row-gap: $grid-gap-none;
+}
+
+.gap-y-xs {
+  row-gap: $grid-gap-xs;
+}
+
+.gap-y-sm {
+  row-gap: $grid-gap-sm;
+}
+
+.gap-y-md {
+  row-gap: $grid-gap-md;
+}
+
+.gap-y-lg {
+  row-gap: $grid-gap-lg;
+}
+
+.gap-y-xl {
+  row-gap: $grid-gap-xl;
+}
+
+.gap-y-2xl {
+  row-gap: $grid-gap-2xl;
+}
+
+// Column gap only
+.gap-x-none {
+  column-gap: $grid-gap-none;
+}
+
+.gap-x-xs {
+  column-gap: $grid-gap-xs;
+}
+
+.gap-x-sm {
+  column-gap: $grid-gap-sm;
+}
+
+.gap-x-md {
+  column-gap: $grid-gap-md;
+}
+
+.gap-x-lg {
+  column-gap: $grid-gap-lg;
+}
+
+.gap-x-xl {
+  column-gap: $grid-gap-xl;
+}
+
+.gap-x-2xl {
+  column-gap: $grid-gap-2xl;
+}
+
+// ----------------------------------------------------------------------------
+// Grid Alignment Utilities
+// ----------------------------------------------------------------------------
+
+// Align items on the block (vertical) axis
+.items-start {
+  align-items: start;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-end {
+  align-items: end;
+}
+
+.items-stretch {
+  align-items: stretch;
+}
+
+// ----------------------------------------------------------------------------
+// Individual Item Alignment
+// ----------------------------------------------------------------------------
+
+// Self-align on block axis
+.self-start {
+  align-self: start;
+}
+
+.self-center {
+  align-self: center;
+}
+
+.self-end {
+  align-self: end;
+}
+
+.self-stretch {
+  align-self: stretch;
+}
+
+// ----------------------------------------------------------------------------
+// Column Start/End Position Utilities (Advanced)
+// ----------------------------------------------------------------------------
+// For precise control over where columns start and end in the grid
+
+@for $i from 1 through ($grid-columns + 1) {
+  .col-start-#{$i} {
+    grid-column-start: $i;
+  }
+
+  .col-end-#{$i} {
+    grid-column-end: $i;
+  }
+}
+
+// Auto positioning
+.col-start-auto {
+  grid-column-start: auto;
+}
+
+.col-end-auto {
+  grid-column-end: auto;
+}
+
+// ----------------------------------------------------------------------------
+// Row Span Utilities
+// ----------------------------------------------------------------------------
+// Control how many rows an item spans
+
+.row-span-1 {
+  grid-row: span 1 / span 1;
+}
+
+.row-span-2 {
+  grid-row: span 2 / span 2;
+}
+
+.row-span-3 {
+  grid-row: span 3 / span 3;
+}
+
+.row-span-4 {
+  grid-row: span 4 / span 4;
+}
+
+.row-span-5 {
+  grid-row: span 5 / span 5;
+}
+
+.row-span-6 {
+  grid-row: span 6 / span 6;
+}
+
+.row-span-full {
+  grid-row: 1 / -1;
+}
+
+// ----------------------------------------------------------------------------
+// Grid Auto Flow Utilities
+// ----------------------------------------------------------------------------
+
+.grid-flow-row {
+  grid-auto-flow: row;
+}
+
+.grid-flow-col {
+  grid-auto-flow: column;
+}
+
+.grid-flow-dense {
+  grid-auto-flow: dense;
+}
+
+.grid-flow-row-dense {
+  grid-auto-flow: row dense;
+}
+
+.grid-flow-col-dense {
+  grid-auto-flow: column dense;
+}
+
+// ----------------------------------------------------------------------------
+// Display Utilities (Grid-related)
+// ----------------------------------------------------------------------------
+
+.grid-inline {
+  display: inline-grid;
+}
+
+// Hide/Show at specific breakpoints
+.hidden {
+  display: none;
+}
+
+@each $breakpoint, $min-width in $breakpoints-grid {
+  @include respond-above($breakpoint) {
+    .#{$breakpoint}\:hidden {
+      display: none;
+    }
+
+    .#{$breakpoint}\:block {
+      display: block;
+    }
+
+    .#{$breakpoint}\:grid {
+      display: grid;
+    }
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Order Utilities
+// ----------------------------------------------------------------------------
+// Control the visual order of grid items
+
+.order-first {
+  order: -9999;
+}
+
+.order-last {
+  order: 9999;
+}
+
+.order-none {
+  order: 0;
+}
+
+@for $i from 1 through 12 {
+  .order-#{$i} {
+    order: $i;
+  }
+}
+

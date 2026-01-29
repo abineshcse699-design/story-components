@@ -1,0 +1,15 @@
+@use '@angular/material' as mat;
+
+@include mat.form-field-overrides((
+  container-vertical-padding: 11px,
+  container-height: 48px,
+  outlined-focus-outline-color: var(--color-primary-green-dark),
+  outlined-outline-width: 1px,
+  outlined-focus-outline-width: 2px,
+  outlined-input-text-placeholder-color: var(--color-text-placeholder),
+));
+
+.mdc-text-field--outlined {
+  background-color: var(--color-bg-white);
+  border-radius: var(--mat-sys-corner-extra-small) !important;
+}

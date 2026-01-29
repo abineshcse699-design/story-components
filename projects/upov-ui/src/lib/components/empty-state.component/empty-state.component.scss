@@ -1,0 +1,41 @@
+.empty-state {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 325px;
+}
+
+.empty-content {
+  width: 525px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 64px;
+  height: 64px;
+}
+
+.empty-title {
+  font-family: 'Figtree', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1c4240;
+  margin: 0;
+}
+
+.empty-subtitle {
+  font-family: 'Figtree', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #1c4240;
+  margin: 0;
+
+  strong {
+    font-weight: 700;
+  }
+}

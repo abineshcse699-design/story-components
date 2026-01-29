@@ -1,0 +1,14 @@
+<mat-select
+  class="filter-select"
+  [placeholder]="placeholder"
+  [multiple]="multiple"
+  [value]="value"
+  (selectionChange)="onSelectionChange($event.value)"
+>
+  <mat-option
+    *ngFor="let option of options"
+    [value]="option.value"
+  >
+    {{ option.label }}
+  </mat-option>
+</mat-select>

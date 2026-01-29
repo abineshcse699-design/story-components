@@ -1,0 +1,47 @@
+<footer aria-label="Site footer" role="contentinfo">
+  <div class="grid-container grid">
+    <div class="footer-logo col-12 md:col-4">
+      <upov-logo light size="medium"></upov-logo>
+    </div>
+    <div class="footer-content col-12 md:col-8">
+      <div class="footer-text">
+        @if (footerText()) {
+          {{ footerText() }}
+        } @else {
+          <ng-content>
+            UPOV promotes plant breeding worldwide by protecting new plant varieties, contributing to
+            sustainable development and global food security.
+          </ng-content>
+        }
+      </div>
+
+      @if (socialLinks().length) {
+        <div aria-label="Social media links" class="social-media-links" role="navigation">
+          @for (link of socialLinks(); track link.url) {
+            <a [attr.aria-label]="link.name + ' (opens in new window)'" [href]="link.url" class="social-media-link"
+               iconOutlined matIconButton rel="noopener noreferrer"
+               target="_blank"
+               upovButton>
+              <span class="sr-only">{{ link.name }}</span>
+              @if (link.icon) {
+                @if (isSvgIcon(link.icon)) {
+                  <mat-icon [svgIcon]="link.icon"></mat-icon>
+                } @else {
+                  <mat-icon [fontIcon]="link.icon"></mat-icon>
+                }
+              }
+            </a>
+          }
+        </div>
+      }
+
+      @if (footerLinks().length) {
+        <nav aria-label="Footer navigation" class="footer-nav">
+          @for (link of footerLinks(); track link.url) {
+            <a [href]="link.url" class="footer-link">{{ link.name }}</a>
+          }
+        </nav>
+      }
+    </div>
+  </div>
+</footer>

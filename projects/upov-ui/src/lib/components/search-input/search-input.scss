@@ -1,0 +1,128 @@
+@use "../../../styles/grid" as grid;
+
+:host {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: stretch;
+
+  @include grid.respond-above('sm') {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+.search-field {
+  flex: 1;
+}
+
+.clear-button {
+  display: inline-block;
+  height: 36px;
+
+  ::ng-deep .mdc-button__label {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.search-toggle {
+  display: none;
+
+  @include grid.respond-above('sm') {
+    display: block;
+  }
+}
+
+.search-toggle-mobile {
+  display: block;
+
+  @include grid.respond-above('sm') {
+    display: none;
+  }
+}
+
+.clear-button {
+  background: none;
+  border: none;
+  font-size: inherit;
+  line-height: 1;
+  color: var(--color-primary-green-dark);
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    font-size: 30px;
+    width: 1em;
+    height: 1em;
+  }
+
+  &__text {
+    display: none;
+
+    @include grid.respond-above('sm') {
+      display: inline;
+    }
+  }
+}
+
+.addons {
+  position: absolute;
+  top: 6px;
+  right: -5px;
+  display: flex;
+  gap: 10px;
+  height: 36px;
+}
+
+::ng-deep {
+  .search-highlight {
+    padding: 0;
+    font-weight: 700;
+    background: none;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
+    display: none;
+  }
+
+  .search-field:has(.mat-mdc-autocomplete-visible) {
+    border-bottom: none;
+
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-bottom: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .mdc-notched-outline {
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 1px;
+        left: 10px;
+        right: 10px;
+        background: var(--color-border-light);
+      }
+    }
+  }
+
+  .autocomplete-container {
+    border: 1px solid var(--color-primary-green-dark);
+    border-top: none;
+  }
+
+  .search-field:has(.mdc-text-field--focused) {
+    .autocomplete-container {
+      border-width: 2px;
+    }
+  }
+}

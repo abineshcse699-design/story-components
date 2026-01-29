@@ -1,0 +1,21 @@
+:host {
+  --logo-accent-color: var(--color-primary-green-light);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.upov-logo {
+  display: block;
+  height: 1em;
+  color: var(--color-text-primary);
+
+  &-light {
+    color: var(--color-text-negative);
+  }
+}
+
+svg {
+  height: 1em;
+  width: auto;
+  pointer-events: none;
+}

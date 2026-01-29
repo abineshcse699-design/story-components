@@ -1,0 +1,62 @@
+@use 'sass:math';
+
+.gradient-bg-teal-lime {
+  background: linear-gradient(
+      var(--gradient-angle, 90deg),
+      color-mix(in oklab, var(--color-primary-green-dark) var(--gradient-opacity, 100%), transparent) 0%,
+      color-mix(in oklab, var(--color-primary-green-light) var(--gradient-opacity, 100%), transparent) 100%
+  );
+}
+
+.gradient-bg-lime-forest {
+  background: linear-gradient(
+      var(--gradient-angle, 90deg),
+      color-mix(in oklab, var(--color-primary-green-light) var(--gradient-opacity, 100%), transparent) 0%,
+      color-mix(in oklab, var(--color-primary-green-bright) var(--gradient-opacity, 100%), transparent) 100%
+  );
+}
+
+.gradient-bg-forest-pine {
+  background: linear-gradient(
+      var(--gradient-angle, 90deg),
+      color-mix(in oklab, var(--color-primary-green-bright) var(--gradient-opacity, 100%), transparent) 0%,
+      color-mix(in oklab, var(--color-primary-green) var(--gradient-opacity, 100%), transparent) 100%
+  );
+}
+
+/* Helper: only change gradient direction */
+.gradient-right-left {
+  --gradient-angle: 270deg;
+}
+
+.gradient-left-right {
+  --gradient-angle: 90deg;
+}
+
+.gradient-up-down {
+  --gradient-angle: 180deg;
+}
+
+.gradient-down-up {
+  --gradient-angle: 0deg;
+}
+
+.gradient-diag-45 {
+  --gradient-angle: 45deg;
+}
+
+.gradient-diag-135 {
+  --gradient-angle: -45deg;
+}
+
+/* Helpers: set gradient opacity for both color stops */
+@mixin gradient-opacity-classes($start: 5, $end: 100, $step: 5) {
+  @for $i from 0 through math.div($end - $start, $step) {
+    $opacity: $start + ($i * $step);
+    .gradient-opacity-#{$opacity} {
+      --gradient-opacity: #{$opacity}#{"%"};
+    }
+  }
+}
+
+@include gradient-opacity-classes();

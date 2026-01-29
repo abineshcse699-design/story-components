@@ -1,0 +1,81 @@
+@use '../../../styles/functions' as upov;
+
+:host {
+  --card-padding: 12px;
+}
+
+.card-badge {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  > span {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    transform: translate(0, 0);
+    margin: 0;
+  }
+}
+
+.speccy-title {
+  display: flex;
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  text-transform: uppercase;
+}
+
+.speccy-icon {
+  background-color: upov.rgba-var(--color-text-muted, 8%);
+  border-radius: 99px;
+  margin-right: 5px;
+}
+
+.speccy-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: var(--card-padding);
+  gap: var(--card-padding);
+}
+
+.speccy-card-content {
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+  place-content: space-between;
+}
+
+.speccy-image {
+  display: flex;
+  flex: 0 0 116px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 116px;
+  height: 120px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-neutral-200);
+  font-size: 13px;
+}
+
+.speccy-family {
+  font-size: 14px;
+  font-weight: var(--font-weight-light);
+}
+
+::ng-deep {
+  .mat-mdc-card-md-image {
+    width: 116px !important;
+    height: 120px !important;
+  }
+
+  .mat-mdc-card-content, .mat-mdc-card-header {
+    padding: 0 !important;
+  }
+}

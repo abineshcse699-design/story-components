@@ -1,0 +1,47 @@
+<nav class="header-nav-list desktop-nav">
+  @for (item of items(); track item.label) {
+    <li class="header-nav-item">
+      @if (item.children && item.children.length > 0) {
+        <button
+          [matMenuTriggerFor]="menu"
+          class="header-nav-link header-nav-link-dropdown"
+          matButton="text"
+          size="small"
+          upovButton
+        >
+          {{ item.label }}
+          <mat-icon class="menu-button-arrow" inline>arrow_drop_down</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu"
+                  class="header-nav-dropdown"
+                  xPosition="before">
+          @for (child of item.children; track child.label) {
+            <a
+              [routerLink]="child.link"
+              class="header-nav-dropdown-item"
+              mat-menu-item
+              routerLinkActive="active"
+            >
+              {{ child.label }}
+            </a>
+          }
+        </mat-menu>
+
+      }
+       @else {
+        <a
+          [routerLink]="item.link"
+          class="header-nav-link"
+          matButton="text"
+          routerLinkActive="active"
+          size="small"
+          upovButton
+        >
+          {{ item.label }}
+        </a>
+      }
+    </li>
+  }
+</nav>
+

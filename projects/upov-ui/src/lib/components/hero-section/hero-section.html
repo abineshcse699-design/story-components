@@ -1,0 +1,21 @@
+<header class="hero grid-container">
+  @if (!!title()) {
+    <h1 class="hero__title">{{ title() }}</h1>
+  } @else {
+    <div class="hero__title">
+      <ng-content select="[hero-title], hero-title"></ng-content>
+    </div>
+  }
+
+  @if (!!subtitle()) {
+    <p class="hero__subtitle">{{ subtitle() }}</p>
+  } @else {
+    <div class="hero__subtitle">
+      <ng-content select="[hero-subtitle], hero-subtitle"></ng-content>
+    </div>
+  }
+
+  <div class="hero__content">
+    <ng-content></ng-content>
+  </div>
+</header>

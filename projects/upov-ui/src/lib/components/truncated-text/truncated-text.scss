@@ -1,0 +1,12 @@
+.trunk {
+  display: flex;
+  width: 100%;
+}
+
+.text {
+  flex-grow: 1;
+  width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

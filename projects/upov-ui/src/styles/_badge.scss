@@ -1,0 +1,24 @@
+@use '@angular/material' as mat;
+
+:root {
+  @include mat.badge-overrides((
+    container-size: 21px,
+    line-height: 21px,
+    container-shape: 6px,
+    container-padding: 0 8px,
+    text-font: 16px,
+  ));
+}
+
+.mat-badge {
+  .mat-badge-content {
+    border: 1px solid var(--color-bg-white);
+    font-size: 13px !important;
+  }
+}
+
+.badge-green {
+  @include mat.badge-overrides((
+    background-color: var(--color-primary-green-bright),
+  ));
+}

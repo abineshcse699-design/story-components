@@ -1,0 +1,18 @@
+<div class="empty-state">
+  <div class="empty-content">
+
+    <img
+      *ngIf="icon"
+      [src]="icon"
+      alt="Empty state"
+      class="empty-icon"
+    />
+
+    <p class="empty-title" [innerHTML]="title"></p>
+
+    <p class="empty-subtitle">
+      {{ subtitle }}
+    </p>
+
+  </div>
+</div>

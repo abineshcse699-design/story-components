@@ -1,0 +1,60 @@
+<div class="authority-card">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="flag">
+      <img
+        *ngIf="flagUrl"
+        [src]="flagUrl"
+        [alt]="countryName"
+        (error)="flagUrl = ''"
+      />
+      <div *ngIf="!flagUrl" class="flag-placeholder"></div>
+    </div>
+
+    <div class="country">
+      <h3>{{ countryName }}</h3>
+      <span *ngIf="countryIso">({{ countryIso }})</span>
+    </div>
+  </div>
+
+  <!-- Authority -->
+  <div class="authority-info">
+    <strong>{{ authorityName }}</strong>
+    <p *ngIf="department">{{ department }}</p>
+  </div>
+
+  <!-- Protection -->
+  <div class="protection" *ngIf="coverageType || memberSince">
+    <div *ngIf="coverageType">
+      <mat-icon>verified</mat-icon>
+      <span>{{ coverageType }}</span>
+    </div>
+
+    <div *ngIf="memberSince">
+      <mat-icon>event</mat-icon>
+      <span>Member since {{ memberSince }}</span>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- Contact -->
+  <div class="contact">
+    <div class="contact-item" *ngIf="phone">
+      <mat-icon>phone</mat-icon>
+      <span>{{ phone }}</span>
+    </div>
+
+    <div class="contact-item" *ngIf="email">
+      <mat-icon>email</mat-icon>
+      <span class="link">{{ email }}</span>
+    </div>
+
+    <div class="contact-item" *ngIf="website">
+      <mat-icon>language</mat-icon>
+      <span class="link">{{ website }}</span>
+    </div>
+  </div>
+
+</div>

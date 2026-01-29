@@ -1,0 +1,37 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: block;
+  height: 36px;
+
+  @include mat.button-toggle-overrides((
+    state-layer-color: var(--color-yellow-dust),
+    divider-color: var(--color-yellow-dust),
+    text-color: var(--color-primary-green-dark),
+    label-text-line-height: 1,
+  ));
+}
+
+::ng-deep {
+  .mat-button-toggle-group.mat-button-toggle-group-appearance-standard {
+    box-sizing: border-box;
+    padding: 2px;
+    height: 100%;
+    background-color: var(--color-bg-white);
+  }
+
+  .mat-button-toggle.mat-button-toggle-appearance-standard {
+    border-radius: var(--mat-sys-corner-extra-large);
+    border: none !important;
+
+    .mat-button-toggle-button {
+      height: 100%;
+    }
+
+    .mat-button-toggle-label-content {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

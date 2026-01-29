@@ -1,0 +1,13 @@
+
+  <header class="header grid-container grid items-center">
+    <div class="header-logo col-6 md:col-3">
+     <upov-logo light size="medium"></upov-logo>
+     </div>
+     <nav aria-label="Primary navigation" class="header-nav col-6 md:col-9" role="navigation">
+     @if (navigationItems().length > 0) {
+      <upov-header-nav [items]="navigationItems()"> </upov-header-nav>
+     } @else {
+       <ng-content select="upov-header-nav"></ng-content>
+     }
+      </nav>
+  </header>

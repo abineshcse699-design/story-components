@@ -1,0 +1,3 @@
+@function rgba-var($css-color-var, $alpha) {
+  @return color-mix(in srgb, var($css-color-var) $alpha, transparent);
+}

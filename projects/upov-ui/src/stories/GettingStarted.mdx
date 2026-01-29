@@ -1,0 +1,306 @@
+import {Meta} from "@storybook/addon-docs/blocks";
+
+<Meta title="Getting Started/Installation & Usage"/>
+
+# Getting Started with UPOV UI
+
+<div className="sb-paragraph">
+  UPOV UI is a modern Angular component library built on top of Angular Material and Angular CDK.
+  It provides a set of reusable, accessible, and customizable components following Angular 20+ best practices
+  with signals, standalone components, and OnPush change detection.
+</div>
+
+---
+
+## Installation
+
+### Prerequisites
+
+Before installing UPOV UI, ensure your project meets these requirements:
+
+<ul className="sb-list">
+  <li><strong>Angular:</strong> Version 21.0.0 or higher</li>
+  <li><strong>Angular Material:</strong> Version 21.0.1 or higher</li>
+  <li><strong>Angular CDK:</strong> Version 21.0.1 or higher</li>
+</ul>
+
+### Step 1: Install the Package
+
+Install UPOV UI via npm (TODO: define the repository etc...):
+
+```bash
+npm install upov-ui
+```
+
+Or using yarn:
+
+```bash
+yarn add upov-ui
+```
+
+Or using pnpm:
+
+```bash
+pnpm add upov-ui
+```
+
+<div className="sb-note">
+  <strong>Note:</strong> UPOV UI has peer dependencies on Angular Material and Angular CDK.
+  If you don't have them installed, the package manager will prompt you to install them.
+</div>
+
+### Step 2: Install Peer Dependencies
+
+If Angular Material and CDK are not already installed:
+
+```bash
+npm install @angular/material@^21.0.1 @angular/cdk@^21.0.1
+```
+
+### Step 3: Import Styles
+
+Import the UPOV UI styles in your `angular.json`:
+
+```json
+{
+  "projects": {
+    "your-project": {
+      "architect": {
+        "build": {
+          "options": {
+            "styles": [
+              "upov-ui/styles/upov-ui.scss",
+              "src/styles.scss"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+<div className="sb-warning">
+  <strong>Important:</strong> Make sure your project is configured to use SCSS.
+  If you're starting a new project, you can configure it during <code>ng new</code> or
+  update your <code>angular.json</code> to use SCSS.
+</div>
+
+### Step 4: Provide UPOV UI
+
+Initialize UPOV UI library in `app.config.ts`:
+
+```typescript
+// src/app/app.config.ts
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideUpovUi } from 'upov-ui';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideUpovUi(),
+  ]
+};
+
+```
+
+#### Custom SVG Icons (Optional)
+
+You can register custom SVG icons by passing a configuration:
+
+```typescript
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideUpovUi} from 'upov-ui';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideUpovUi({icons: [
+      { name: 'custom-icon', path: 'assets/icons/custom-icon.svg' },
+    ]}),
+  ]
+};
+```
+
+Or register icons programmatically using `IconHelper`:
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { IconHelper } from 'upov-ui';
+
+export class AppComponent {
+  private iconHelper = inject(IconHelper);
+
+  constructor() {
+    // Register a single icon
+    this.iconHelper.registerIcon('custom-icon', 'assets/icons/custom-icon.svg');
+
+    // Register multiple icons
+    this.iconHelper.registerIcons([
+      { name: 'icon1', path: 'assets/icons/icon1.svg' },
+      { name: 'icon2', path: 'assets/icons/icon2.svg' },
+    ]);
+  }
+}
+```
+
+#### Using Custom SVG Icons
+
+Use `isSvgIcon()` to determine whether to use `fontIcon` or `svgIcon` with `mat-icon`:
+
+```typescript
+import { Component, inject, signal } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
+import { IconHelper } from 'upov-ui';
+
+@Component({
+  selector: 'app-example',
+  imports: [MatIcon],
+  template: `
+    @if (iconHelper.isSvgIcon(iconName())) {
+      <mat-icon [svgIcon]="iconName()"></mat-icon>
+    } @else {
+      <mat-icon [fontIcon]="iconName()"></mat-icon>
+    }
+  `
+})
+export class ExampleComponent {
+  protected iconHelper = inject(IconHelper);
+  protected iconName = signal('custom-icon');
+}
+```
+
+---
+
+## Basic Usage
+
+### Importing Components
+
+UPOV UI uses standalone components, so you can import them directly where needed:
+
+```typescript
+// app.component.ts
+import { Component } from '@angular/core';
+import { Logo, Footer, HeroSection, SearchInput } from 'upov-ui';
+
+@Component({
+  selector: 'app-root',
+  imports: [Logo, Footer, HeroSection, SearchInput],
+  template: `
+    <upov-hero-section
+      title="Welcome to UPOV"
+      subtitle="A modern Angular component library">
+      <upov-search-input></upov-search-input>
+    </upov-hero-section>
+
+    <main>
+      <upov-logo size="large"></upov-logo>
+    </main>
+
+    <upov-footer></upov-footer>
+  `
+})
+export class AppComponent {}
+```
+
+## Configuration
+
+### Global Footer Configuration
+
+Configure the footer globally using the `FOOTER_CONFIG` injection token. See the Footer component stories for detailed examples and configuration options.
+
+```typescript
+// src/app/app.config.ts
+import { ApplicationConfig } from '@angular/core';
+import { FOOTER_CONFIG, FooterConfig } from 'upov-ui';
+
+const customFooterConfig: FooterConfig = {
+  socialLinks: [
+    { name: 'Twitter', url: 'https://twitter.com/yourcompany', icon: 'twitter' },
+  ],
+  footerLinks: [
+    { name: 'About', url: '/about' },
+  ],
+  footerText: 'Custom footer text for your application.',
+};
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    { provide: FOOTER_CONFIG, useValue: customFooterConfig },
+  ]
+};
+```
+
+---
+
+<div className="sb-success">
+  <strong>🎉 You're all set!</strong> Start building amazing Angular applications with UPOV UI.
+</div>
+
+---
+
+
+## Best Practices
+
+  <div className="sb-success">
+
+    ### Use Signals for State Management
+
+    UPOV UI components use signals. Follow the same pattern in your application:
+
+    ```typescript
+    import {Component, signal, computed} from '@angular/core';
+
+    @Component({
+    selector: 'app-example',
+    template: `
+    <p>Count: {{ count() }}</p>
+    <p>Double: {{ doubled() }}</p>
+    <button (click)="increment()">Increment</button>
+  `
+})
+export class ExampleComponent {
+  count = signal(0);
+  doubled = computed(() => this.count() * 2);
+
+  increment() {
+  this.count.update(value => value + 1);
+  }
+  }
+  ```
+
+  </div>
+
+  <div className="sb-note">
+
+  ### Use OnPush Change Detection
+
+  All UPOV UI components use `OnPush` change detection for optimal performance:
+
+  ```typescript
+  import { Component, ChangeDetectionStrategy } from '@angular/core';
+
+  @Component({
+    selector: 'app-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    // ...
+  })
+  export class ExampleComponent {}
+  ```
+
+    </div>
+
+    <div className="sb-warning">
+
+    ### Import Only What You Need
+
+    Import components individually to benefit from tree-shaking:
+
+```typescript
+// ✅ Good - tree-shakeable
+    import { Logo, Footer } from 'upov-ui';
+
+// ❌ Avoid - imports everything
+    import * as UpovUI from 'upov-ui';
+    ```
+
+</div>

@@ -1,0 +1,96 @@
+.search-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+/* ================= INPUT ================= */
+.search-input-wrapper {
+  flex: 1;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 2px solid #1c4240;
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.search-icon {
+  color: #1c4240;
+  margin-right: 8px;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1c4240;
+}
+
+/* ================= TOGGLE ================= */
+.search-toggle {
+  ::ng-deep .mat-button-toggle-group {
+    height: 32px;
+    border-radius: 48px;
+    border: 1px solid #939600;
+  }
+
+  ::ng-deep .mat-button-toggle-checked {
+    background: #d4e834;
+  }
+}
+
+/* ================= AUTOCOMPLETE ================= */
+.autocomplete-dropdown {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border: 2px solid #1c4240;
+  border-radius: 0 0 4px 4px;
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 2000;
+}
+
+.autocomplete-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #e6e6e6;
+
+  &:hover {
+    background: #e4f2e7;
+  }
+}
+
+.autocomplete-main {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1c4240;
+}
+
+.autocomplete-sub {
+  font-size: 14px;
+  color: #303030;
+}
+
+/* ================= SUBMIT ================= */
+.search-btn {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 100px;
+  background: #1c4240 !important;
+  color: #dade14 !important;
+}

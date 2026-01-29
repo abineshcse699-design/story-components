@@ -1,0 +1,47 @@
+<upov-toggle class="search-toggle-mobile"
+             [value]="selectedToggleValue()"
+             [options]="toggleOptions()"
+             (change)="onToggleChange($event)"
+></upov-toggle>
+<mat-form-field class="search-field">
+  <input type="text"
+         matInput
+         [placeholder]="placeholder()"
+         [formControl]="searchControl"
+         [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete"
+                    class="autocomplete-container"
+                    (optionSelected)="onSelect()">
+    @for (option of filteredOptions(); track option.value) {
+      <mat-option [value]="option.value">
+        <span [innerHTML]="highlightText(option.value, currentSearchValue())"></span>
+        @if (option.description) {
+          <br><small class="upov-text-muted">{{ option.description }}</small>
+        }
+      </mat-option>
+    }
+  </mat-autocomplete>
+  <div class="addons">
+    @if (clereable() && currentSearchValue()) {
+      <button
+        class="clear-button"
+        aria-label="Clear"
+        type="button"
+        (click)="clearSearch()"
+      >
+        <span class="clear-button__content">
+          <mat-icon class="clear-button__icon" aria-hidden="false" fontIcon="close"></mat-icon>
+          <span class="clear-button__text">Clear</span>
+        </span>
+      </button>
+    }
+    @if (toggleOptions().length) {
+      <upov-toggle class="search-toggle"
+                   [value]="selectedToggleValue()"
+                   [options]="toggleOptions()"
+                   (change)="onToggleChange($event)"
+      ></upov-toggle>
+    }
+  </div>
+</mat-form-field>
+<button matButton (click)="onSearch()">Search</button>

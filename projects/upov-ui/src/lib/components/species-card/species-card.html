@@ -1,0 +1,40 @@
+<mat-card appearance="raised" class="speccy-card">
+  <div class="speccy-card-content">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>
+          <div class="speccy-title">
+            @if (speccyTitle()) {
+              @if (speccyIcon()) {
+                <mat-icon [fontIcon]="speccyIcon()!" class="speccy-icon"></mat-icon>
+              }
+              {{ speccyTitle() }}
+            }
+          </div>
+          <span class="upov-text-underline">{{ title() }}</span>
+        </mat-card-title>
+        @if (subtitle()) {
+          <mat-card-subtitle>{{ subtitle() }}</mat-card-subtitle>
+        }
+        @if (badge()) {
+          <div
+            [matBadge]="badge()"
+            class="card-badge badge-green"
+            matBadgeOverlap="false"
+          ></div>
+        }
+        <!--      <img mat-card-avatar>-->
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      <upov-truncated-text class="upov-text-weight-medium">{{ variants() }}</upov-truncated-text>
+      <div class="speccy-family">{{ family() }}</div>
+    </mat-card-content>
+  </div>
+
+  <div [style.background-image]="backgroundImage()" class="speccy-image">
+    @if (!speccyImage()) {
+      No image<br>available
+    }
+  </div>
+</mat-card>

@@ -1,0 +1,34 @@
+<div class="autocomplete-dropdown">
+
+  <!-- Loading -->
+  <div class="autocomplete-loading" *ngIf="loading">
+    Searching…
+  </div>
+
+  <!-- Results -->
+  <div *ngIf="!loading && items.length > 0">
+    <div
+      class="autocomplete-item"
+      *ngFor="let item of items"
+      (mousedown)="onSelect(item)"
+    >
+      <div class="autocomplete-main">
+        {{ item.main }}
+      </div>
+
+      <div class="autocomplete-sub" *ngIf="item.sub">
+        {{ item.sub }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty -->
+  <div
+    class="autocomplete-empty"
+    *ngIf="!loading && items.length === 0"
+  >
+    <span class="empty-title">{{ emptyText }}</span>
+    <span class="empty-subtitle">{{ emptyHint }}</span>
+  </div>
+
+</div>

@@ -1,0 +1,65 @@
+{
+  "name": "upov-ds",
+  "version": "0.0.1",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build upov-ui",
+    "build:dev-app": "npm run build && ng build && http-server -p 3000 ./dist/upov-ds/browser -o",
+    "pack": "npm run build && cd dist/upov-ui && npm pack",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test upov-ui",
+    "storybook": "ng run upov-ui:storybook",
+    "build:storybook": "ng run upov-ui:build-storybook",
+    "serve:storybook-build": "npx http-server -p 3200 ./dist/storybook/upov-ui/ -o",
+    "generate": "node scripts/generate.mjs",
+    "g": "node scripts/g.mjs"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "packageManager": "npm@11.6.2",
+  "dependencies": {
+    "@angular/cdk": "^21.0.2",
+    "@angular/common": "^21.0.3",
+    "@angular/compiler": "^21.0.3",
+    "@angular/core": "^21.0.3",
+    "@angular/forms": "^21.0.3",
+    "@angular/material": "^21.0.2",
+    "@angular/platform-browser": "^21.0.3",
+    "@angular/router": "^21.0.3",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "upov-ui": "file:dist/upov-ui"
+  },
+  "devDependencies": {
+    "@angular-devkit/architect": "^0.2100.2",
+    "@angular-devkit/build-angular": "^21.0.2",
+    "@angular-devkit/core": "^21.0.2",
+    "@angular/build": "^21.0.2",
+    "@angular/cli": "^21.0.2",
+    "@angular/compiler-cli": "^21.0.3",
+    "@angular/platform-browser-dynamic": "^21.0.3",
+    "http-server": "^14.1.1",
+    "jsdom": "^27.1.0",
+    "ng-packagr": "^21.0.0",
+    "sass": "^1.94.2",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8",
+    "storybook": "^10.1.4",
+    "@storybook/angular": "^10.1.4",
+    "@storybook/addon-a11y": "^10.1.4",
+    "@storybook/addon-docs": "^10.1.4",
+    "@compodoc/compodoc": "^1.1.32"
+  }
+}

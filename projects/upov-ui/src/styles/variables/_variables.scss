@@ -1,0 +1,85 @@
+:root {
+  /* === Primary Colors === */
+  --color-primary-green-dark: #1C4240;
+  --color-primary-green: #46B2A0;
+  --color-primary-green-bright: #009A6E;
+  --color-primary-green-light: #DADE14;
+  --color-primary-brown-light: #B8B4A4;
+
+  /* === Secondary Colors === */
+  --color-yellow: #DED532;
+  --color-yellow-dust: #939600;
+  --color-green-dust: #547F71;
+  --color-blue-light: #82BECD;
+  --color-blue: #3585CB;
+  --color-orange-dark: #AD4E02;
+  --color-orange: #D57C35;
+  --color-orange-light: #FEF0E6;
+  --color-purple: #A51E91;
+  --color-ruby: #C83C58;
+
+  /* === Neutral Colors === */
+  --color-neutral-900: #000000;
+  --color-neutral-800: #303030;
+  --color-neutral-600: #636363;
+  --color-neutral-500: #727272;
+  --color-neutral-300: #C4C4C4;
+  --color-neutral-200: #E2E2E2;
+  --color-neutral-100: #F9F9F9;
+  --color-neutral-black: #000000;
+  --color-neutral-white: #ffffff;
+
+  /* === Alerts/Errors === */
+  --color-danger: var(--color-ruby);
+
+  --color-warning: var(--color-orange);
+  --color-warning-light: var(--color-orange-light);
+  --color-warning-dark: var(--color-orange-dark);
+
+  /* === Text Colors === */
+  --color-text-darnger: var(--color-danger);
+  --color-text-warning: var(--color-warning-dark);
+  --color-text-primary: var(--color-primary-green-dark);
+  --color-text: var(--color-neutral-800);
+  --color-text-secondary: var(--color-neutral-500);
+  --color-text-placeholder: var(--color-neutral-500);
+  --color-text-muted: var(--color-neutral-600);
+  --color-text-negative: var(--color-neutral-white);
+
+  /* === Background Colors === */
+  --color-bg-white: var(--color-neutral-white);
+  --color-bg-light: var(--color-neutral-100);
+  --color-bg-warning: var(--color-orange-light);
+
+  /* === Border Colors === */
+  --color-border-light: var(--color-neutral-200);
+  --color-border-dark: var(--color-primary-green-dark);
+
+  /* === Gradient Backgrounds === */
+  --bg-gradient-teal-lime: linear-gradient(90deg, var(--color-primary-green-dark) 0%, var(--color-primary-green-light) 100%);
+  --bg-gradient-lime-forest: linear-gradient(90deg, var(--color-primary-green-light) 0%, var(--color-primary-green-bright) 100%);
+  --bg-gradient-forest-pine: linear-gradient(90deg, var(--color-primary-green-bright) 0%, var(--color-primary-green) 100%);
+
+  --mat-form-field-outlined-container-color: var(--color-bg-white);
+  --mat-option-hover-state-layer-color: var(--color-bg-light);
+
+  /* === Font Weights === */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-bolder: 900;
+
+  /* === Typography === */
+  --base-font-size: 16px; // (body)
+  --base-line-height: 1.4em;
+
+  --h1-font-size: 1.75rem;
+  --h1-line-height: 1.2em;
+
+  --h2-font-size: 1.5rem;
+  --h2-line-height: 1.2em;
+
+  --h3-font-size: 1.37rem;
+  --h3-line-height: 1.2em;
+}

@@ -1,0 +1,32 @@
+<!-- ===============================
+     genie-species-card.html
+     =============================== -->
+<div class="species-card">
+  <div class="species-content">
+    <div class="species-code-row">
+      <mat-icon class="species-icon">spa</mat-icon>
+      <span class="species-code">{{ upovCode }}</span>
+    </div>
+
+    <h3 class="species-name">{{ botanicalName }}</h3>
+
+    <p class="species-family" *ngIf="family">{{ family }}</p>
+    <p class="species-crop-type" *ngIf="cropType">{{ cropType }}</p>
+  </div>
+
+  <div class="species-image-wrapper">
+    <img
+      *ngIf="imageUrl && !imageError"
+      [src]="imageUrl"
+      [alt]="botanicalName"
+      class="species-image"
+      (error)="onImageError()"
+    />
+
+    <div *ngIf="!imageUrl || imageError" class="species-placeholder-image">
+      <span class="no-image-text">No image available</span>
+    </div>
+
+    <span class="updated-badge" *ngIf="updated">Updated</span>
+  </div>
+</div>

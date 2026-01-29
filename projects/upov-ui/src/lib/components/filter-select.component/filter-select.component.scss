@@ -1,0 +1,68 @@
+::ng-deep .filter-select.mat-mdc-select {
+  width: 370px;
+  height: 40px;
+  font-family: 'Figtree', sans-serif;
+}
+
+::ng-deep .filter-select .mat-mdc-select-trigger {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border: 2px solid #1c4240;
+  border-radius: 4px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+::ng-deep .filter-select .mat-mdc-select-value-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: #1c4240;
+}
+
+::ng-deep .filter-select .mat-mdc-select-placeholder {
+  font-size: 14px;
+  color: #727272;
+}
+
+::ng-deep .filter-select .mat-mdc-select-arrow {
+  display: none !important;
+}
+
+::ng-deep .filter-select .mat-mdc-select-trigger::after {
+  content: 'expand_more';
+  font-family: 'Material Icons';
+  font-size: 24px;
+  color: #1c4240;
+  margin-left: 8px;
+}
+
+::ng-deep .mat-mdc-select-panel {
+  background: #ffffff;
+  border: 2px solid #1c4240;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-height: 300px;
+}
+
+/* Options */
+::ng-deep .mat-mdc-option {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+::ng-deep .mat-mdc-option:hover .mdc-list-item__primary-text,
+::ng-deep .mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text {
+  background: #e4f2e7;
+}
+
+/* Checkbox */
+::ng-deep .mat-pseudo-checkbox {
+  border: 2px solid #1c4240;
+  border-radius: 2px;
+}
+
+::ng-deep .mat-pseudo-checkbox-checked {
+  background: #dade14;
+}
