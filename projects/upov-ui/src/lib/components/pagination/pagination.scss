@@ -1,80 +1,117 @@
 .pagination {
   display: flex;
+  margin-top: 330px;
   justify-content: center;
+  width: 100%;
 }
 
+/* Inner container – true center */
 .pagination-inner {
   display: flex;
   align-items: center;
   gap: 4px;
+
+  width: fit-content;
+  margin: 0 auto;
 }
 
+/* Base button */
 .page-btn {
   height: 40px;
   min-width: 40px;
   padding: 0 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border-radius: 4px;
   border: 1px solid #939600;
   background: #ffffff;
+
   font-family: 'Figtree', sans-serif;
   font-size: 16px;
   cursor: pointer;
-
-  &:hover:not(:disabled):not(.active) {
-    background: rgba(218, 222, 20, 0.08);
-  }
-
-  &:disabled {
-    opacity: 0.4;
-    cursor: default;
-  }
+  user-select: none;
 }
 
+.page-btn:hover:not(:disabled):not(.active) {
+  background: rgba(218, 222, 20, 0.08);
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Active page number */
 .page-number.active {
   background: #1c4240;
   color: #dade14;
   font-weight: 700;
 }
 
+/* Dots */
 .page-dots {
   width: 40px;
   text-align: center;
+  font-size: 18px;
 }
 
+/* Page info wrapper */
 .page-info-wrapper {
   position: relative;
+  margin: 0 4px;
 }
 
+/* "1 of 8" button */
 .page-info-btn {
   padding: 0 12px;
+  gap: 6px;
 }
 
+/* Dropdown – show only 1 to 9 */
 .page-dropdown {
   position: absolute;
-  bottom: 46px;
-  left: 0;
-  min-width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 64px;
+  height: 324px; /* 9 × 36px */
+  overflow: hidden;
+
   background: #ffffff;
   border: 1px solid #939600;
   border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+
+  z-index: 1000;
 }
 
+/* Dropdown items */
 .page-dropdown-item {
+  width: 100%;
   height: 36px;
-  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border: none;
   background: #ffffff;
   cursor: pointer;
 
-  &:hover {
-    background: rgba(218, 222, 20, 0.15);
-  }
+  font-family: 'Figtree', sans-serif;
+  font-size: 14px;
+}
 
-  &.active {
-    background: #1c4240;
-    color: #dade14;
-  }
+.page-dropdown-item:hover {
+  background: rgba(218, 222, 20, 0.15);
+}
+
+.page-dropdown-item.active {
+  background: #1c4240;
+  color: #dade14;
+  font-weight: 600;
 }

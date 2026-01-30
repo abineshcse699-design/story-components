@@ -110,10 +110,10 @@ export const Complete: Story = {
     countryName: 'France',
     countryIso: 'FR',
     flagUrl: 'https://flagcdn.com/w80/fr.png',
-    authorityName: 'INOV',
+    authorityName: 'James Dovovan',
     department: 'National Office for Plant Varieties',
-    phone: '+33 1 23 45 67 89',
-    email: 'contact@inov.fr',
+    phone: '+54 11 4349 1354',
+    email: 'j.dovovan@australia.pvp.com',
     website: 'https://www.inov.fr',
     coverageType: 'All genera and species',
     memberSince: '1961',
@@ -127,9 +127,16 @@ export const Minimal: Story = {
   args: {
     countryName: 'Germany',
     countryIso: 'DE',
-    authorityName: 'Bundessortenamt',
-    department: 'Federal Plant Variety Office',
+        flagUrl: 'https://flagcdn.com/w80/de.png',
+    authorityName: 'James Dovovan',
+    department: 'National Office for Plant Varieties',
+    phone: '+54 11 4349 1354',
+    email: 'j.dovovan@australia.pvp.com',
+    website: 'https://www.inov.fr',
+    coverageType: 'All genera and species',
+    memberSince: '1961',
   },
+  
 };
 
 /**
@@ -139,11 +146,15 @@ export const NoFlag: Story = {
   args: {
     countryName: 'European Union',
     countryIso: 'EU',
-    flagUrl: '',
-    authorityName: 'CPVO',
-    department: 'Community Plant Variety Office',
-    website: 'https://cpvo.europa.eu',
+         flagUrl: 'https://flagcdn.com/w80/eu.png',
+
+    authorityName: 'James Dovovan',
+    department: 'National Office for Plant Varieties',
+    phone: '+54 11 4349 1354',
+    email: 'j.dovovan@australia.pvp.com',
+    website: 'https://www.inov.fr',
     coverageType: 'All genera and species',
+    memberSince: '1961',
   },
 };
 
@@ -155,10 +166,13 @@ export const NoContactDetails: Story = {
     countryName: 'Japan',
     countryIso: 'JP',
     flagUrl: 'https://flagcdn.com/w80/jp.png',
-    authorityName: 'MAFF',
-    department: 'Ministry of Agriculture, Forestry and Fisheries',
-    coverageType: 'Selected genera and species',
-    memberSince: '1982',
+    authorityName: 'James Dovovan',
+    department: 'National Office for Plant Varieties',
+    phone: '+54 11 4349 1354',
+    email: 'j.dovovan@australia.pvp.com',
+    website: 'https://www.inov.fr',
+    coverageType: 'All genera and species',
+    memberSince: '1961',
   },
 };
 
@@ -170,15 +184,13 @@ export const LongText: Story = {
     countryName: 'United Kingdom of Great Britain and Northern Ireland',
     countryIso: 'GB',
     flagUrl: 'https://flagcdn.com/w80/gb.png',
-    authorityName: 'Animal and Plant Health Agency – Plant Variety Rights Office',
-    department:
-      'Plant Variety Rights and Seeds Division, Department for Environment, Food & Rural Affairs',
-    phone: '+44 20 7238 6000',
-    email: 'plantvarieties.rights@defra.gov.uk',
-    website: 'https://www.gov.uk/government/organisations/animal-and-plant-health-agency',
-    coverageType:
-      'All agricultural, vegetable, fruit, ornamental and forest tree species',
-    memberSince: '1965',
+   authorityName: 'James Dovovan',
+    department: 'National Office for Plant Varieties',
+    phone: '+54 11 4349 1354',
+    email: 'j.dovovan@australia.pvp.com',
+    website: 'https://www.inov.fr',
+    coverageType: 'All genera and species',
+    memberSince: '1961',
   },
 };
 
@@ -188,14 +200,18 @@ export const LongText: Story = {
 export const GridLayout: Story = {
   render: () => ({
     template: `
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; padding: 16px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(520px, 1fr)); gap: 16px; padding: 16px;">
         <upov-authority-card
           countryName="France"
           countryIso="FR"
           flagUrl="https://flagcdn.com/w80/fr.png"
           authorityName="INOV"
-          department="National Office for Plant Varieties"
-          coverageType="All genera and species"
+           department= 'National Office for Plant Varieties',
+    phone= '+54 11 4349 1354',
+    email= 'j.dovovan@australia.pvp.com',
+    website= 'https://www.inov.fr',
+    coverageType= 'All genera and species',
+    memberSince= '1961',
         ></upov-authority-card>
 
         <upov-authority-card
@@ -203,8 +219,12 @@ export const GridLayout: Story = {
           countryIso="DE"
           flagUrl="https://flagcdn.com/w80/de.png"
           authorityName="Bundessortenamt"
-          department="Federal Plant Variety Office"
-          coverageType="All genera and species"
+          department= 'National Office for Plant Varieties',
+    phone= '+54 11 4349 1354',
+    email= 'j.dovovan@australia.pvp.com',
+    website= 'https://www.inov.fr',
+    coverageType= 'All genera and species',
+    memberSince= '1961',
         ></upov-authority-card>
 
         <upov-authority-card
@@ -212,8 +232,12 @@ export const GridLayout: Story = {
           countryIso="JP"
           flagUrl="https://flagcdn.com/w80/jp.png"
           authorityName="MAFF"
-          department="Ministry of Agriculture, Forestry and Fisheries"
-          coverageType="Selected genera and species"
+           department= 'National Office for Plant Varieties',
+    phone= '+54 11 4349 1354',
+    email= 'j.dovovan@australia.pvp.com',
+    website= 'https://www.inov.fr',
+    coverageType= 'All genera and species',
+    memberSince= '1961',
         ></upov-authority-card>
       </div>
     `,
@@ -226,14 +250,18 @@ export const GridLayout: Story = {
 export const NarrowContainer: Story = {
   render: () => ({
     template: `
-      <div style="max-width: 360px; padding: 16px; border: 1px dashed #ccc;">
+      <div style="max-width: 660px; padding: 16px; border: 1px dashed #ccc;">
         <upov-authority-card
           countryName="Italy"
           countryIso="IT"
           flagUrl="https://flagcdn.com/w80/it.png"
           authorityName="CREA"
-          department="Council for Agricultural Research"
-          coverageType="All genera and species"
+         department= 'National Office for Plant Varieties',
+    phone= '+54 11 4349 1354',
+    email= 'j.dovovan@australia.pvp.com',
+    website= 'https://www.inov.fr',
+    coverageType= 'All genera and species',
+    memberSince= '1961',
         ></upov-authority-card>
       </div>
     `,

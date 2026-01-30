@@ -1,0 +1,77 @@
+<div class="search-wrapper">
+
+  <div
+    class="search-input-container"
+    [class.autocomplete-open]="showAutocomplete() && autocomplete.length">
+
+    <mat-icon class="search-icon">search</mat-icon>
+
+    <input
+      type="text"
+      class="search-input"
+      [formControl]="searchControl"
+      [placeholder]="placeholder"
+      autocomplete="off"
+      (blur)="hideAutocomplete()"
+      (keyup.enter)="submit()" />
+
+    <button
+      *ngIf="clearable && searchControl.value"
+      class="clear-btn"
+      type="button"
+      (click)="clear()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <!-- Toggle stays INSIDE input container -->
+   <div class="search-toggle" *ngIf="toggleOptions.length">
+  <mat-button-toggle-group
+    [value]="activeToggle()"
+    (change)="onToggleSelect($event.value)"
+    [hideSingleSelectionIndicator]="true">
+
+    <mat-button-toggle
+      *ngFor="let toggle of toggleOptions"
+      [value]="toggle.value">
+      {{ toggle.label }}
+    </mat-button-toggle>
+
+  </mat-button-toggle-group>
+</div>
+
+
+    <!-- Autocomplete -->
+    <div
+      class="autocomplete-dropdown"
+      *ngIf="showAutocomplete() && autocomplete.length">
+
+      <div
+        class="autocomplete-item"
+        *ngFor="let raw of autocomplete | slice:0:8"
+        (mousedown)="selectOption(raw)">
+
+        <div class="autocomplete-main">
+          {{ asOption(raw).value }}
+        </div>
+
+        <div
+          class="autocomplete-sub"
+          *ngIf="asOption(raw).description">
+          {{ asOption(raw).description }}
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Search button -->
+  <button
+    mat-raised-button
+    class="search-btn"
+    type="button"
+    (click)="submit()">
+    Search
+  </button>
+
+</div>
