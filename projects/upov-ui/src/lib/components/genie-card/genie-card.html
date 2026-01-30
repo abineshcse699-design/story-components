@@ -1,0 +1,47 @@
+<div class="species-card" (click)="onCardClick()">
+
+  <!-- LEFT CONTENT -->
+  <div class="species-content">
+
+    <div class="species-code-row">
+      <mat-icon class="species-icon">spa</mat-icon>
+      <span class="species-code">{{ species.upovCode }}</span>
+    </div>
+
+    <h3 class="species-name">
+      {{ species.botanicalName }}
+    </h3>
+
+    <p class="species-common" *ngIf="species.commonName">
+      {{ species.commonName }}
+    </p>
+
+    <p class="species-family" *ngIf="species.family">
+      {{ species.family }}
+    </p>
+
+
+  </div>
+
+  <!-- RIGHT IMAGE -->
+  <div class="species-image-wrapper">
+
+    <img
+      *ngIf="species.imageUrl"
+      [src]="species.imageUrl"
+      [alt]="species.botanicalName"
+      class="species-image" />
+
+    <div
+      *ngIf="!species.imageUrl"
+      class="species-placeholder-image">
+      <span class="no-image-text">No image available</span>
+    </div>
+
+    <span class="updated-badge" *ngIf="species.updated">
+      Updated
+    </span>
+
+  </div>
+
+</div>

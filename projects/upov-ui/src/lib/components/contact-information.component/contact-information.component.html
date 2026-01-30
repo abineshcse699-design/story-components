@@ -1,0 +1,37 @@
+<div class="contact-card">
+  <h3>{{ title }}</h3>
+
+  <p *ngIf="registrar"><strong>{{ registrar }}</strong></p>
+  <p *ngIf="department">{{ department }}</p>
+
+  <div class="contact-item" *ngIf="department || country">
+    <span class="icon">
+      <mat-icon>location_on</mat-icon>
+    </span>
+    <span>
+      {{ department }}<br />
+      {{ country }}
+    </span>
+  </div>
+
+  <div class="contact-item" *ngIf="phone">
+    <span class="icon">
+      <mat-icon>phone</mat-icon>
+    </span>
+    <span>{{ phone }}</span>
+  </div>
+
+  <div class="contact-item" *ngIf="email">
+    <span class="icon">
+      <mat-icon>email</mat-icon>
+    </span>
+    <span class="contact-link">{{ email }}</span>
+  </div>
+
+  <div class="contact-item" *ngIf="website">
+    <span class="icon">
+      <mat-icon>language</mat-icon>
+    </span>
+    <span class="contact-link">{{ website }}</span>
+  </div>
+</div>
