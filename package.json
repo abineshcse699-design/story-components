@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build upov-ui",
+   "build-storybook": "npm run build:storybook",
     "build:dev-app": "npm run build && ng build && http-server -p 3000 ./dist/upov-ds/browser -o",
     "pack": "npm run build && cd dist/upov-ui && npm pack",
     "watch": "ng build --watch --configuration development",

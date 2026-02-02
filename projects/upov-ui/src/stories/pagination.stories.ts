@@ -9,14 +9,18 @@ const meta: Meta<PaginationComponent> = {
   title: 'Components/Pagination',
   component: PaginationComponent,
   decorators: [
+
     moduleMetadata({
       imports: [
+        
         CommonModule,
         MatIconModule,
         MatButtonModule,
         PaginationComponent
+
       ],
     }),
+
   ],
   tags: ['autodocs'],
   argTypes: {
